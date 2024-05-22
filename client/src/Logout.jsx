@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 const Logout = () => {
     const handleLogout = async () => {
         try {
-            const response = await fetch('http://localhost:5001/api/logout', {
+            const response = await fetch('https://t-apiz.vercel.app/api/logout', {
                 method: 'POST',
                 credentials: 'include'
             });
