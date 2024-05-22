@@ -17,7 +17,7 @@ const Registration = () => {
         setLoading(true);
         try {
             await new Promise(resolve => setTimeout(resolve, 1500));
-            const response = await fetch('http://localhost:5001/api/register', {
+            const response = await fetch('https://t-apiz.vercel.app/api/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
