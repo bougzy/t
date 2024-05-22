@@ -39,7 +39,7 @@ app.use(express.json());
 app.use(helmet());
 
 const corsOptions = {
-    origin: 'http://localhost:5173',
+    origin: 'https://hallmarkmoviesnmysteries.vercel.app',
     credentials: true
 };
 
