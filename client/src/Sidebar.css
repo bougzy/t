@@ -1,0 +1,10 @@
+#sidebar-collapse {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 40m ease-in-out;
+  }
+  
+  #sidebar-collapse.show {
+    max-height: 200px; /* Adjust this value as needed */
+  }
+  
