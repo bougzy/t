@@ -11,7 +11,7 @@ const My = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:5001/api/deposit', {
+                const response = await fetch('https://t-apiz.vercel.app/api/deposit', {
                     credentials: 'include'
                 });
 
@@ -34,7 +34,7 @@ const My = () => {
     const handleDeposit = async () => {
         if (!isNaN(inputValue) && parseFloat(inputValue) > 0) {
             try {
-                const response = await fetch('http://localhost:5001/api/deposit', {
+                const response = await fetch('https://t-apiz.vercel.app/api/deposit', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
