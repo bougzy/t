@@ -20,7 +20,7 @@ const ResetPassword = () => {
             // Simulate a delay of 1.5 seconds
             await new Promise(resolve => setTimeout(resolve, 1500));
 
-            const response = await fetch('http://localhost:5001/api/reset-password', {
+            const response = await fetch('https://t-apiz.vercel.app/api/reset-password', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
