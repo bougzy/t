@@ -21,7 +21,7 @@ const Login = () => {
 
         try {
             await new Promise(resolve => setTimeout(resolve, 1500));
-            const response = await fetch('http://localhost:5001/api/login', {
+            const response = await fetch('https://t-apiz.vercel.app/api/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',  
