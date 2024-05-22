@@ -9,9 +9,14 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-mongoose.connect('mongodb+srv://movi:movi@movi.muqtx3v.mongodb.net/movi', {
+// Improved logging for MongoDB connection
+mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
+}).then(() => {
+    console.log('Connected to MongoDB');
+}).catch(err => {
+    console.error('MongoDB connection error:', err);
 });
 
 const depositSchema = new mongoose.Schema({
@@ -49,12 +54,12 @@ app.use(limiter);
 
 app.use(
     session({
-        secret: 'your_secret_key',
+        secret: process.env.SESSION_SECRET || 'default_secret', // Use environment variable for session secret
         resave: false,
         saveUninitialized: false,
         cookie: {
             httpOnly: true,
-            secure: false, // Set to true if using HTTPS
+            secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
             maxAge: 1000 * 60 * 60 * 24 // 1 day
         }
     })
@@ -72,6 +77,7 @@ app.post('/api/register', async (req, res) => {
         await newUser.save();
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
+        console.error('Error during registration:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
@@ -86,6 +92,7 @@ app.post('/api/login', async (req, res) => {
         req.session.userId = user._id;
         res.json({ message: 'Login successful' });
     } catch (error) {
+        console.error('Error during login:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
@@ -113,6 +120,7 @@ app.post('/api/deposit', requireAuth, async (req, res) => {
         await deposit.save();
         res.status(201).json({ message: 'Deposit saved successfully' });
     } catch (error) {
+        console.error('Error during deposit:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
@@ -129,6 +137,7 @@ app.get('/api/deposit', requireAuth, async (req, res) => {
             res.json({ amount: 0, profitBalance: 0 });
         }
     } catch (error) {
+        console.error('Error fetching deposit:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
